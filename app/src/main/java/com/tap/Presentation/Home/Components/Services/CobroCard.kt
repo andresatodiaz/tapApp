@@ -25,6 +25,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.tap.Data.Entities.Cobro
 import com.tap.Presentation.Cobrar.CobrarDialog
 import com.tap.Presentation.Pagar.PagarDialog
@@ -36,11 +37,12 @@ import com.tap.ui.theme.secondaryBlue
 
 @Composable
 fun CobroCard(
-    cobro: Cobro
+    cobro: Cobro,
+    navController: NavController
 ) {
     val openDialog = remember{ mutableStateOf(false) }
     if(openDialog.value){
-        CobrarDialog(cobro = cobro, openDialog = openDialog)
+        CobrarDialog(cobro = cobro, openDialog = openDialog,navController)
     }
     Card (
         shape= RoundedCornerShape(20.dp),

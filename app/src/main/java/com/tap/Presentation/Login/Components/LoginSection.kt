@@ -36,7 +36,8 @@ import com.tap.ui.theme.mainBlue
 @Composable
 fun LoginSection(
     typeUser:MutableState<String>,
-    goToMain: ()->Unit
+    goToMain: ()->Unit,
+    auth: ()->Unit
 ) {
     val user = remember{mutableStateOf("")}
     val pass = remember{mutableStateOf("")}
@@ -85,7 +86,8 @@ fun LoginSection(
             ),
             modifier= Modifier.fillMaxWidth(0.6f),
             onClick = {
-                goToMain()
+                auth()
+                //goToMain()
             }) {
             Text("Iniciar Sesión",modifier= Modifier.padding(10.dp), fontWeight = FontWeight.Bold)
         }

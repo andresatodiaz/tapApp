@@ -31,6 +31,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
+import androidx.navigation.NavController
 import com.tap.Data.Entities.Cobro
 import com.tap.Presentation.Notification.Notification
 import com.tap.R
@@ -40,7 +41,8 @@ import com.tap.ui.theme.secondaryBlue
 @Composable
 fun CobrarDialog(
     cobro: Cobro,
-    openDialog: MutableState<Boolean>
+    openDialog: MutableState<Boolean>,
+    navController: NavController
 ) {
     val context = LocalContext.current
     Dialog(onDismissRequest = { openDialog.value=false}) {
@@ -87,7 +89,9 @@ fun CobrarDialog(
                         contentColor = Color.White
                     ),
                     onClick = {
-                        Notification(context = context ).showBasicNotification("Tap","Pago satisfactorio!")
+                        navController.navigate(
+                            "serviceScreen/${cobro.nombre}/${cobro.precio.toInt().toString()}/${cobro.fecha.replace("/",",")}/true"
+                        )
                     }) {
                     Text("Ver pagos", fontWeight = FontWeight.Bold)
                 }

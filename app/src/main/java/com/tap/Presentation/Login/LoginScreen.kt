@@ -1,5 +1,9 @@
 package com.tap.Presentation.Login
 
+import android.widget.Toast
+import androidx.biometric.BiometricManager.Authenticators.BIOMETRIC_STRONG
+import androidx.biometric.BiometricManager.Authenticators.DEVICE_CREDENTIAL
+import androidx.biometric.BiometricPrompt
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -26,6 +30,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -33,9 +38,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.FragmentActivity
 import com.tap.Presentation.Login.Components.LoginBanner
 import com.tap.Presentation.Login.Components.LoginSection
 import com.tap.Presentation.Login.Components.StartSection
+import com.tap.Presentation.Notification.Notification
 import com.tap.R
 import com.tap.ui.theme.mainBlue
 import com.tap.ui.theme.secondaryBlue
@@ -46,6 +54,50 @@ fun LoginScreen(
     goToMain: ()-> Unit
 ){
     val typeUser = remember{mutableStateOf("")}
+
+    val context = LocalContext.current
+    val activity = LocalContext.current as FragmentActivity
+    val executor  = ContextCompat.getMainExecutor(activity)
+
+    val promptInfo = BiometricPrompt.PromptInfo.Builder()
+        .setTitle("Para generar el token digital")
+        .setDescription("Ingrese su huelle digital o clave del dispositivo")
+        .setAllowedAuthenticators(BIOMETRIC_STRONG or DEVICE_CREDENTIAL)
+        .build()
+
+    val biometricPrompt = BiometricPrompt(activity,executor,
+        object : BiometricPrompt.AuthenticationCallback(){
+            override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
+                super.onAuthenticationError(errorCode, errString)
+                    Toast.makeText(
+                        context,
+                        "Error",
+                        Toast.LENGTH_LONG
+                    ).show()
+            }
+
+            override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
+                super.onAuthenticationSucceeded(result)
+                Toast.makeText(
+                    context,
+                    "Correcto",
+                    Toast.LENGTH_LONG
+                ).show()
+                goToMain()
+                Notification(context = context ).showBasicNotification("Tap","Token digital guardado en el app")
+            }
+
+            override fun onAuthenticationFailed() {
+                super.onAuthenticationFailed()
+                Toast.makeText(
+                    context,
+                    "Falló",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+        })
+
+
 
     Column(
         modifier= Modifier
@@ -64,7 +116,9 @@ fun LoginScreen(
         if(typeUser.value==""){
             StartSection(typeUser = typeUser)
         }else{
-            LoginSection(typeUser = typeUser, goToMain=goToMain)
+            LoginSection(typeUser = typeUser, goToMain=goToMain ){
+                biometricPrompt.authenticate(promptInfo)
+            }
         }
     }
 }

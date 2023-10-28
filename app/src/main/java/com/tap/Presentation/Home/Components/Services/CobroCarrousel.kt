@@ -72,7 +72,7 @@ fun CobroCarrousel(
                     horizontalArrangement = Arrangement.spacedBy(10.dp)
                 ){
                     items(cobroList){cobro->
-                        CobroCard(cobro = cobro)
+                        CobroCard(cobro = cobro,navController)
                         Spacer(Modifier.padding(10.dp))
                     }
                 }
@@ -113,7 +113,7 @@ fun CobroCarrousel(
         modifier= Modifier.fillMaxWidth(),
     ){
         items(cobroList){cobro->
-            CobroCard(cobro)
+            CobroCard(cobro,navController)
             Spacer(modifier = Modifier.padding(end=20.dp))
         }
     }
