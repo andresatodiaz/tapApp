@@ -15,6 +15,7 @@ import com.tap.Presentation.Agregar.Generico.GenericoScreen
 import com.tap.Presentation.Agregar.PagoTerceros.PagoTercerosScreen
 import com.tap.Presentation.Financiera.FinancieraScreen
 import com.tap.Presentation.Home.HomeScreen
+import com.tap.Presentation.PagoExitoso.PagoExitoso
 import com.tap.Presentation.Perfil.PerfilScreen
 import com.tap.Presentation.ServiceInfo.ServiceScreen
 
@@ -73,6 +74,9 @@ fun MainNavigationGraph (
                 navController.navigate("vida")
             }
             ServiceScreen(nombre = nombre, precio = precio, fecha = fecha, operaciones = operaciones,navController)
+        }
+        composable("pagoExitoso"){
+            PagoExitoso()
         }
     }
 
