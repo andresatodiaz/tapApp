@@ -67,9 +67,11 @@ fun LoginSection(
     val loadingCompletion = remember{ mutableStateOf(0f) }
 
     LaunchedEffect(key1 = register.value ){
-        delay(2000)
-        register.value=false
-        Notification(context = context ).showBasicNotification("Tap","Se ha registrado su usuario")
+        if(register.value==true){
+            delay(2000)
+            register.value=false
+            Notification(context = context ).showBasicNotification("Tap","Se ha registrado su usuario")
+        }
     }
 
     if(register.value){

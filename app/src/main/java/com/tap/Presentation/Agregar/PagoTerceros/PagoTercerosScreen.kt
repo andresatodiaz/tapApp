@@ -78,6 +78,28 @@ fun PagoTercerosScreen(
             ){
                 Text("Agregar servicio", fontWeight = FontWeight.Bold)
             }
+            OutlinedTextField(
+                modifier= Modifier
+                    .padding(top=20.dp,bottom = 20.dp)
+                    .fillMaxWidth(),
+                label={
+                    Text(text="Nombre del servicio")
+                },
+                colors = TextFieldDefaults.textFieldColors(
+                    focusedIndicatorColor = mainBlue,
+                    containerColor = Color.Transparent
+                ),
+                trailingIcon = {
+                    if(codigo.value.isNotEmpty()){
+                        Icon(imageVector = Icons.Default.Clear, contentDescription = "clear",modifier=Modifier.clickable {
+                            codigo.value=""
+                        })
+                    }
+
+                },
+                value = codigo.value, onValueChange = {codigo.value=it},
+                shape = CircleShape
+            )
             Text("Cuenta de beneficiario", fontWeight = FontWeight.Bold)
             Row(
 
