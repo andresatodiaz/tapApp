@@ -13,6 +13,7 @@ import com.example.ecommmerceapp.presentation.QrScanner.QrScannerScreen
 import com.example.ecommmerceapp.presentation.QrScanner.ViewModel.QrScannerViewModel
 import com.tap.Presentation.Agregar.Generico.GenericoScreen
 import com.tap.Presentation.Agregar.PagoTerceros.PagoTercerosScreen
+import com.tap.Presentation.Financiera.FinancieraScreen
 import com.tap.Presentation.Home.HomeScreen
 import com.tap.Presentation.Perfil.PerfilScreen
 import com.tap.Presentation.ServiceInfo.ServiceScreen
@@ -43,6 +44,9 @@ fun MainNavigationGraph (
         }
         composable("qr"){
             QrScannerScreen(navController = navController, qrScannerViewModel =qrScannerViewModel )
+        }
+        composable("financiero"){
+            FinancieraScreen()
         }
         composable("serviceScreen/{nombre}/{precio}/{fecha}/{operaciones}", arguments =
             listOf(

@@ -32,6 +32,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
+import androidx.navigation.NavController
 import com.tap.Data.Entities.Service
 import com.tap.Presentation.Notification.Notification
 import com.tap.ui.theme.mainBlue
@@ -40,7 +41,8 @@ import com.tap.ui.theme.secondaryBlue
 @Composable
 fun PagarDialog(
     service: Service,
-    openDialog: MutableState<Boolean>
+    openDialog: MutableState<Boolean>,
+    navController: NavController
 ) {
     val context = LocalContext.current
     Dialog(onDismissRequest = { openDialog.value=false}) {
@@ -52,7 +54,12 @@ fun PagarDialog(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Row(
-                modifier = Modifier.fillMaxWidth().clickable {  },
+                modifier = Modifier.fillMaxWidth().clickable {
+                    if(service.fecha!=null){
+                        navController.navigate("serviceScreen/${service.nombre}/${service.precio.toInt().toString()}/${service.fecha.replace("/",",")}/true")
+
+                    }
+                },
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically
             ){

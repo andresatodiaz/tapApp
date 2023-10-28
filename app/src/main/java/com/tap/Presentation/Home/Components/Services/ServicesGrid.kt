@@ -14,10 +14,5 @@ fun ServicesGrid(
     section:String,
     servicesList: List<Service>
 ){
-    Text(section, fontWeight = FontWeight.Black)
-    LazyVerticalGrid(columns = GridCells.Fixed(2)){
-        items(servicesList){service->
-            ServiceCard(service = service)
-        }
-    }
+
 }

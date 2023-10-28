@@ -77,7 +77,7 @@ fun ServicesCarrousel(
                     horizontalArrangement = Arrangement.spacedBy(10.dp)
                 ){
                     items(servicesList){service->
-                        ServiceCard(service = service)
+                        ServiceCard(service = service,navController)
                         Spacer(Modifier.padding(10.dp))
                     }
                 }
@@ -120,7 +120,7 @@ fun ServicesCarrousel(
         modifier=Modifier.fillMaxWidth(),
     ){
         items(servicesList){service->
-           ServiceCard(service)
+           ServiceCard(service,navController)
             Spacer(modifier = Modifier.padding(end=20.dp))
         }
     }

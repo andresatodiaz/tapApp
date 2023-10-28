@@ -19,7 +19,7 @@ sealed class NavItem(
     )
     object Perfil: NavItem(
         route="perfil",
-        title = "perfil",
+        title = "Perfil",
         icon= R.drawable.user
     )
 }

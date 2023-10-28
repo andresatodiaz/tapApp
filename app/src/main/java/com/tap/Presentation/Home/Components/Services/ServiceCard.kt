@@ -23,6 +23,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.tap.Data.Entities.Service
 import com.tap.Presentation.Pagar.PagarDialog
 import com.tap.ui.theme.debt
@@ -32,11 +33,12 @@ import com.tap.ui.theme.secondaryBlue
 
 @Composable
 fun ServiceCard(
-    service:Service
+    service:Service,
+    navController: NavController
 ) {
     val openDialog = remember{ mutableStateOf(false) }
     if(openDialog.value){
-        PagarDialog(service = service, openDialog = openDialog)
+        PagarDialog(service = service, openDialog = openDialog, navController )
     }
     Card (
         shape= RoundedCornerShape(20.dp),
