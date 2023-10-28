@@ -18,6 +18,7 @@ import com.tap.Presentation.Home.HomeScreen
 import com.tap.Presentation.PagoExitoso.PagoExitoso
 import com.tap.Presentation.Perfil.PerfilScreen
 import com.tap.Presentation.ServiceInfo.ServiceScreen
+import com.tap.Presentation.Sobres.SobreScreen
 
 @Composable
 fun MainNavigationGraph (
@@ -47,7 +48,7 @@ fun MainNavigationGraph (
             QrScannerScreen(navController = navController, qrScannerViewModel =qrScannerViewModel )
         }
         composable("financiero"){
-            FinancieraScreen()
+            FinancieraScreen(navController)
         }
         composable("serviceScreen/{nombre}/{precio}/{fecha}/{operaciones}", arguments =
             listOf(
@@ -75,8 +76,16 @@ fun MainNavigationGraph (
             }
             ServiceScreen(nombre = nombre, precio = precio, fecha = fecha, operaciones = operaciones,navController)
         }
-        composable("pagoExitoso"){
-            PagoExitoso()
+        composable("pagoExitoso/{destino}", arguments = listOf(
+            navArgument("destino"){
+                type= NavType.StringType
+            }
+        )){
+            val destino = it.arguments!!.getString("destino")!!
+            PagoExitoso(navController,destino)
+        }
+        composable("sobreScreen"){
+            SobreScreen()
         }
     }
 

@@ -78,7 +78,7 @@ fun PerfilScreen(
                 state = state,
                 refreshTriggerDistance = trigger,
                 fade = true,
-                contentColor = Color.LightGray,
+                contentColor = mainBlue,
                 scale = true,
                 backgroundColor = Color.White,
                 shape = MaterialTheme.shapes.small.copy(CornerSize(percent = 100))

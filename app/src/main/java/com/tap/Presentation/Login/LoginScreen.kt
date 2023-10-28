@@ -38,6 +38,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.window.Dialog
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 import com.tap.Presentation.Login.Components.LoginBanner
@@ -74,6 +75,7 @@ fun LoginScreen(
                         "Error",
                         Toast.LENGTH_LONG
                     ).show()
+                Notification(context = context ).showBasicNotification("Tap","Verifique su identidad mediante su correo.")
             }
 
             override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
@@ -94,6 +96,7 @@ fun LoginScreen(
                     "Falló",
                     Toast.LENGTH_LONG
                 ).show()
+                Notification(context = context ).showBasicNotification("Tap","Verifique su identidad mediante su correo.")
             }
         })
 

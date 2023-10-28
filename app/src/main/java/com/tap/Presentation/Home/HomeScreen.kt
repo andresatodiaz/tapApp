@@ -4,6 +4,7 @@ import android.Manifest
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -42,6 +43,7 @@ import com.tap.Presentation.Home.Components.Services.CobroCarrousel
 import com.tap.Presentation.Home.Components.Services.ServicesCarrousel
 import com.tap.Presentation.Notification.Notification
 import com.tap.R
+import com.tap.ui.theme.mainBlue
 import com.tap.ui.theme.mainOrange
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -109,7 +111,7 @@ fun HomeScreen(
                             state = state,
                             refreshTriggerDistance = trigger,
                             fade = true,
-                            contentColor = Color.LightGray,
+                            contentColor = mainBlue,
                             scale = true,
                             backgroundColor = Color.White,
                             shape = MaterialTheme.shapes.small.copy(CornerSize(percent = 100))

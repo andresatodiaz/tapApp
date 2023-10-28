@@ -106,6 +106,7 @@ fun PagarDialog(
                     ),
                     onClick = {
                         Notification(context = context ).showBasicNotification("Tap","Pago satisfactorio!")
+                        navController.navigate("pagoExitoso/${service.nombre}")
                     }) {
                     Text("Pagar", fontWeight = FontWeight.Bold)
                 }

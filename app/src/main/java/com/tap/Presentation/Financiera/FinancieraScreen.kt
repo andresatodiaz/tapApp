@@ -33,6 +33,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.SwipeRefreshIndicator
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
@@ -47,7 +48,7 @@ import kotlinx.coroutines.delay
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun FinancieraScreen(
-
+    navController: NavController
 ) {
     val refreshing = remember{ mutableStateOf(true) }
     val swipeRefreshState  = rememberSwipeRefreshState(isRefreshing =refreshing.value)
@@ -55,6 +56,7 @@ fun FinancieraScreen(
         delay(2000)
         refreshing.value=false
     }
+
     Scaffold(
         modifier=Modifier.fillMaxWidth()
     ){
@@ -68,7 +70,7 @@ fun FinancieraScreen(
                     state = state,
                     refreshTriggerDistance = trigger,
                     fade = true,
-                    contentColor = Color.LightGray,
+                    contentColor = mainBlue,
                     scale = true,
                     backgroundColor = Color.White,
                     shape = MaterialTheme.shapes.small.copy(CornerSize(percent = 100))
@@ -140,7 +142,9 @@ fun FinancieraScreen(
                                     containerColor = Color(0xff1b5e20),
                                     contentColor = Color.White
                                 ),
-                                onClick = { /*TODO*/ }) {
+                                onClick = {
+                                    navController.navigate("sobreScreen")
+                                }) {
                                 Text("Agregar")
                             }
                         }

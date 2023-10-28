@@ -21,13 +21,16 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.content.ContextCompat.startActivity
+import androidx.navigation.NavController
 import com.tap.LoginActivity
 import com.tap.R
 import com.tap.ui.theme.mainBlue
 
 @Composable
 fun PagoExitoso(
-
+    navController: NavController,
+    destino:String
 ) {
     val context= LocalContext.current
 
@@ -94,7 +97,7 @@ fun PagoExitoso(
             )
             Spacer(modifier = Modifier.weight(1f))
             Text(
-                text = "Entel",
+                text = destino,
                 color = Color.Black,
                 fontWeight = FontWeight.Bold,
                 fontSize = 20.sp,
@@ -174,7 +177,14 @@ fun PagoExitoso(
                     contentColor = mainBlue
                 ),
                 onClick = {
+                    val sendIntent: Intent = Intent().apply {
+                        action = Intent.ACTION_SEND
+                        putExtra(Intent.EXTRA_TEXT, "This is my text to send.")
+                        type = "text/plain"
+                    }
+                    val shareIntent = Intent.createChooser(sendIntent, null)
 
+                    startActivity(context,shareIntent,null)
                 },
                 modifier = Modifier
                     .fillMaxWidth(0.5f)
@@ -196,7 +206,7 @@ fun PagoExitoso(
                     contentColor = Color.White
                 ),
                 onClick = {
-
+                    navController.navigate("vida")
                 },
                 modifier = Modifier
                     .fillMaxWidth(0.5f)
